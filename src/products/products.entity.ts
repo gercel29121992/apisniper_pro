@@ -65,11 +65,11 @@ export class Products{
     like:number;
     
     
-    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    // created_at: Date;
+    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    created_at: Date;
 
-    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    // updated_at: Date;
+    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    updated_at: Date;
 
    
     @ManyToOne(()=>Category,(category)=>category.id)

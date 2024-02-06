@@ -100,7 +100,7 @@ export class AuthService {
        }
 
     const rolesIds = userFound.roles.map(rol=>rol.id) ;
-    userFound.duplicatesesion=1;
+   // userFound.duplicatesesion=1;
     this.usersRepository.save(userFound);
    const payload={
     id:userFound.id

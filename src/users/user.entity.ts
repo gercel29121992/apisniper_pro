@@ -38,11 +38,11 @@ export class User{
     @Column({nullable:true})
     imagen: string;
 
-    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    // created_at: Date;
+    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    created_at: Date;
 
-    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    // updated_at: Date;
+    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    updated_at: Date;
 
     @JoinTable(
         {name:'user_has_roles',

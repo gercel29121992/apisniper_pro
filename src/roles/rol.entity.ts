@@ -16,11 +16,11 @@ export class Rol {
     @Column( )
     rute: string;
 
-    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    // created_at: Date;
+    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    created_at: Date;
 
-    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    // updated_at: Date;
+    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    updated_at: Date;
 
 
     @ManyToMany(()=>User,(user)=>user.roles)

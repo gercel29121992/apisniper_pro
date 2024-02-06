@@ -14,11 +14,11 @@ import { ProductsModule } from './products/products.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'sql10.freesqldatabase.com',
+      host: '34.171.187.22',
       port: 3306,
-      username: 'sql10682397',
-      password: 'tPEfSsBS25',
-      database: 'sql10682397',
+      username: 'gercel',
+      password: 'Gllv1992..',
+      database: 'sniperpro',
       entities: [__dirname + '/**/*.entity{.ts,.js}' ],
       synchronize: true,
     }),
