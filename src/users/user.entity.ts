@@ -1,6 +1,7 @@
 import { hash } from "bcrypt";
+import { Products } from "src/products/products.entity";
 import { Rol } from "src/roles/rol.entity";
-import { BeforeInsert, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'users'})
 export class User{
@@ -12,6 +13,12 @@ export class User{
 
     @Column()
     lastname: string;
+
+    @Column({default:0})
+    duplicatesesion: number;
+
+    @Column({default: 0})
+    estado: number;
 
 
     @Column({unique:true})
@@ -31,11 +38,11 @@ export class User{
     @Column({nullable:true})
     imagen: string;
 
-    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    created_at: Date;
+    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    // created_at: Date;
 
-    @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-    updated_at: Date;
+    // @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+    // updated_at: Date;
 
     @JoinTable(
         {name:'user_has_roles',
@@ -54,5 +61,8 @@ export class User{
 async hashPassword(){
     this.password=await hash(this.password,Number(process.env.HASH_SALT))
 }
+@OneToMany(()=>Products,products=>products.id)
+products: Products
+
 
 }

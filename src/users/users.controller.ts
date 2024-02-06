@@ -32,6 +32,20 @@ create(@Body() user:CreateUserDto){
 update(@Param('id',ParseIntPipe) id: number,   @Body() user:UpdateUserDto){
     return this.UsersService.update(id, user);
 }
+@HasRoles(JwtRole.ADMIN)
+@UseGuards(JwtAuthGuard,JwtRolesGuard)
+@Put('activate/:id')
+updateactivate(@Param('id',ParseIntPipe) id: number   ){
+    return this.UsersService.activate(id);
+}
+
+@HasRoles(JwtRole.ADMIN)
+@UseGuards(JwtAuthGuard,JwtRolesGuard)
+@Put('inactivate/:id')
+updateinactivate(@Param('id',ParseIntPipe) id: number ){
+    return this.UsersService.inactivate(id );
+}
+
 
 @HasRoles(JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)

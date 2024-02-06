@@ -67,10 +67,29 @@ export class AuthService {
             where:{ email: email},
             relations:['roles']
             })
-      if(!userFound)
+
+     
+     
+     if(!userFound)
       {
             throw new HttpException('EL EMAIL NO EXISTE',HttpStatus.NOT_FOUND);
        }
+
+
+
+       if(userFound.estado==0)
+       {
+             throw new HttpException('Usuario Desactivado',HttpStatus.FORBIDDEN);
+        } 
+   
+        if(userFound.duplicatesesion==1)
+        {
+              throw new HttpException('Usuario tiene una sesion activa',HttpStatus.FORBIDDEN);
+         } 
+        
+          
+       
+        
        
      
    const isPasswordValid = await compare(password,userFound.password)
@@ -81,7 +100,8 @@ export class AuthService {
        }
 
     const rolesIds = userFound.roles.map(rol=>rol.id) ;
-
+    userFound.duplicatesesion=1;
+    this.usersRepository.save(userFound);
    const payload={
     id:userFound.id
     ,name:userFound.name,
@@ -95,5 +115,35 @@ export class AuthService {
 
  delete data.user.password;
    return data;
+    }
+
+
+
+
+
+    async logout(email: string)
+    { 
+         
+        const userFound= await this.usersRepository.findOne({
+            where:{ email: email},
+            relations:['roles']
+            })
+
+     
+     
+     if(!userFound)
+      {
+            throw new HttpException('EL EMAIL NO EXISTE',HttpStatus.NOT_FOUND);
+       }
+
+
+ 
+        if(userFound.duplicatesesion==1)
+        {
+            userFound.duplicatesesion=0;
+            this.usersRepository.save(userFound);
+         } 
+         
+   return true;
     }
 }

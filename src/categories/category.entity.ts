@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Products } from "src/products/products.entity";
+import { Column, Entity, JoinColumn, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'categories'})
 export class Category{
@@ -15,10 +16,13 @@ description: string;
 @Column()
 image: string;
 
-@Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-created_at: Date;
+// @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+// created_at: Date;
 
-@Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
-updated_at: Date;
+// @Column({type:'datetime',default:()=>'CURRENT_TIMESTAMP'})
+// updated_at: Date;
+
+@OneToMany(()=>Products,products=>products.id)
+products: Products
 
 }
