@@ -57,16 +57,16 @@ export class Products{
     tp5:number;
 
 
-    @Column({default:0})
-    tpactivate1:number;
-    @Column({default:0})
-    tpactivate2:number;
-    @Column({default:0})
-    tpactivate3:number;
-    @Column({default:0})
-    tpactivate4:number;
-    @Column({default:0})
-    tpactivate5:number;
+    @Column({default:false})
+    tpactivate1:boolean;
+    @Column({default:false})
+    tpactivate2:boolean;
+    @Column({default:false})
+    tpactivate3:boolean;
+    @Column({default:false})
+    tpactivate4:boolean;
+    @Column({default:false})
+    tpactivate5:boolean;
 
 
     @Column()

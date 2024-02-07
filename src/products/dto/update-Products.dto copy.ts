@@ -15,11 +15,11 @@ export class UpdateProductsDto{
     tp3?: number;
     tp4?: number;
     tp5?: number;
-    tpactivate1?: number;
-    tpactivate2?: number;
-    tpactivate3?: number;
-    tpactivate4?: number;
-    tpactivate5?: number;
+    tpactivate1?: boolean;
+    tpactivate2?: boolean;
+    tpactivate3?: boolean;
+    tpactivate4?: boolean;
+    tpactivate5?: boolean;
     
     id_category?: number;
     id_user?: number;
