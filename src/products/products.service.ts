@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './products.entity';
 import { Repository } from 'typeorm';
 import { CreateProductsDto } from './dto/Create-Products.dto';
+import { dataidDto } from './dto/dataid.dto';
  
 import async_foreach = require('../utils/async_foreach') ;
 import  storage = require('../utils/cloud_storage') ;
@@ -132,5 +133,10 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
     
       return this.producRepository.delete(id);
    
+       }
+
+
+       async getproductiduseridcategory(data: dataidDto){
+        return this.producRepository.findBy({id_category:Number(data.id_category),id_user:Number(data.id_user)});
        }
 }

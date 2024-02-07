@@ -7,6 +7,7 @@ import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { JwtRolesGuard } from 'src/auth/jwt/jwt-roles.guard';
 import { CreateProductsDto } from './dto/Create-Products.dto';
 import { UpdateProductsDto } from './dto/update-Products.dto copy';
+import { dataidDto } from './dto/dataid.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -50,7 +51,11 @@ create(@UploadedFiles(
 }
 
 
+@Post('usercategory')
+login(@Body() dataidDto: dataidDto){
+    return this.producservices.getproductiduseridcategory(dataidDto);
 
+}
 
 @HasRoles(JwtRole.ADMIN)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
