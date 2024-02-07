@@ -57,16 +57,16 @@ export class Products{
     tp5:number;
 
 
-    @Column({ type: 'bool', width: 1 ,default: false})
-    tpactivate1:boolean;
-    @Column({ type: 'bool', width: 1 ,default: false})
-    tpactivate2:boolean;
-    @Column({ type: 'bool', width: 1 ,default: false})
-    tpactivate3:boolean;
-    @Column({ type: 'bool', width: 1 ,default: false})
-    tpactivate4:boolean;
-    @Column({ type: 'bool', width: 1 ,default: false})
-    tpactivate5:boolean;
+    @Column({ type: 'boolean', default: false})
+    tpactivate1:boolean=false;
+    @Column({type: 'boolean' ,default: false})
+    tpactivate2:boolean=false;
+    @Column({type: 'boolean' ,default: false})
+    tpactivate3:boolean=false;
+    @Column({type: 'boolean' ,default: false})
+    tpactivate4:boolean=false;
+    @Column({type: 'boolean' ,default: false})
+    tpactivate5:boolean=false;
 
 
     @Column()
