@@ -56,6 +56,19 @@ export class Products{
     @Column({type: "decimal", precision: 20, scale: 10,default:0})
     tp5:number;
 
+
+    @Column({default:0})
+    tpactivate1:number;
+    @Column({default:0})
+    tpactivate2:number;
+    @Column({default:0})
+    tpactivate3:number;
+    @Column({default:0})
+    tpactivate4:number;
+    @Column({default:0})
+    tpactivate5:number;
+
+
     @Column()
     id_category:number;
     @Column()
