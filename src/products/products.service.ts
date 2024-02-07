@@ -8,6 +8,7 @@ import { dataidDto } from './dto/dataid.dto';
  
 import async_foreach = require('../utils/async_foreach') ;
 import  storage = require('../utils/cloud_storage') ;
+import { activatetpDto } from './dto/activatetp.dto';
 @Injectable()
 export class ProductsService {
 
@@ -123,6 +124,36 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
     }
 
+    async activatetp(data:activatetpDto){
+         
+    
+         const productsFound = await this.producRepository.findOneBy({id:Number(data.id)})
+       if (!productsFound ){
+        throw new HttpException("producto no encontrado",HttpStatus.NOT_FOUND);
+    
+       }
+       if(Number(data.numero)==1){
+        productsFound.tpactivate1=true;
+       }
+       if(Number(data.numero)==2){
+        productsFound.tpactivate2=true;
+       }
+       if(Number(data.numero)==3){
+        productsFound.tpactivate3=true;
+       }
+       if(Number(data.numero)==4){
+        productsFound.tpactivate4=true;
+       }
+       if(Number(data.numero)==5){
+        productsFound.tpactivate5=true;
+       }
+    
+ 
+       const respu= this.producRepository.save(productsFound);
+       if(respu){ return true;}else{return false}
+    
+        }
+
     async delete(id: number){
         const productsFound = await this.producRepository.findOneBy({id:id})
       if (!productsFound ){
@@ -137,6 +168,6 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
 
        async getproductiduseridcategory(data: dataidDto){
-        return this.producRepository.findBy({id_category:Number(data.id_category),id_user:Number(data.id_user)});
+        return await this.producRepository.findBy({id_category:Number(data.id_category),id_user:Number(data.id_user)});
        }
 }
