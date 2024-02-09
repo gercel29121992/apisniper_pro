@@ -176,7 +176,7 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
       }
       productsFound.like=productsFound.like+1;
       const respu= this.producRepository.save(productsFound);
-      if(respu){ return true;}else{return false}
+      if(respu){ return productsFound.like;}else{return 0;}
       
    
        }
