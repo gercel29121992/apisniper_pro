@@ -9,6 +9,7 @@ import { CreateProductsDto } from './dto/Create-Products.dto';
 import { UpdateProductsDto } from './dto/update-Products.dto copy';
 import { dataidDto } from './dto/dataid.dto';
 import { activatetpDto } from './dto/activatetp.dto';
+import { datalikeDto } from './dto/datalike.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -115,9 +116,9 @@ delete (
 @Put('like/:id')
  
 like ( 
-@Param('id',ParseIntPipe) id:number)
+@Param('id',ParseIntPipe) id:number, @Body() datalike:datalikeDto)
   {
  
-  return this.producservices.like(id);
+  return this.producservices.like(id,datalike);
 }
 }

@@ -9,6 +9,7 @@ import { dataidDto } from './dto/dataid.dto';
 import async_foreach = require('../utils/async_foreach') ;
 import  storage = require('../utils/cloud_storage') ;
 import { activatetpDto } from './dto/activatetp.dto';
+import { datalikeDto } from './dto/datalike.dto';
 @Injectable()
 export class ProductsService {
 
@@ -168,14 +169,19 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
 
 
-       async like(id: number){
+       async like(id: number,datalike:datalikeDto){
         const productsFound = await this.producRepository.findOneBy({id:id})
       if (!productsFound ){
        throw new HttpException("producto no encontrado",HttpStatus.NOT_FOUND);
    
       }
+
+
+      if(datalike.numero==0){return productsFound.like;}
       productsFound.like=productsFound.like+1;
       const respu= this.producRepository.save(productsFound);
+
+
       if(respu){ return productsFound.like;}else{return 0;}
       
    
