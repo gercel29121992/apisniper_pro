@@ -25,6 +25,10 @@ findAllCategory(id_category:number){
     return this.producRepository.findBy({id_category:id_category});
 }
 
+findid(id:number){
+    return this.producRepository.findBy({id:id});
+}
+
 
 async create(files: Array<Express.Multer.File>,product: CreateProductsDto){   
     if (files.length===0 ){

@@ -33,6 +33,15 @@ finAllCategory(@Param('id_category',ParseIntPipe) id_category:number,) {
  
   return this.producservices.findAllCategory(id_category);
 }
+
+@HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@UseGuards(JwtAuthGuard ,JwtRolesGuard)
+@Get('id/:id')
+findid(@Param('id',ParseIntPipe) id :number,) {
+ 
+  return this.producservices.findid(id );
+}
+ 
  
 
 @HasRoles(JwtRole.ADMIN)
