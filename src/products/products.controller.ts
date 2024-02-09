@@ -107,4 +107,17 @@ delete (
  
   return this.producservices.delete(id);
 }
+
+
+
+@HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@UseGuards(JwtAuthGuard ,JwtRolesGuard)
+@Delete('like/:id')
+ 
+like ( 
+@Param('id',ParseIntPipe) id:number)
+  {
+ 
+  return this.producservices.delete(id);
+}
 }

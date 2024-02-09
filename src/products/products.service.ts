@@ -27,7 +27,7 @@ findAllCategory(id_category:number){
 
 async create(files: Array<Express.Multer.File>,product: CreateProductsDto){   
     if (files.length===0 ){
-        throw new HttpException("las imagenes son obligatorias",HttpStatus.NOT_FOUND);
+        throw new HttpException("las imagene son obligatorias",HttpStatus.NOT_FOUND);
      
        }
      
@@ -163,6 +163,21 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
    
     
       return this.producRepository.delete(id);
+   
+       }
+
+
+
+       async like(id: number){
+        const productsFound = await this.producRepository.findOneBy({id:id})
+      if (!productsFound ){
+       throw new HttpException("producto no encontrado",HttpStatus.NOT_FOUND);
+   
+      }
+      productsFound.like=productsFound.like+1;
+      const respu= this.producRepository.save(productsFound);
+      if(respu){ return true;}else{return false}
+      
    
        }
 
