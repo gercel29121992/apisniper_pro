@@ -112,12 +112,12 @@ delete (
 
 @HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
-@Delete('like/:id')
+@Put('like/:id')
  
 like ( 
 @Param('id',ParseIntPipe) id:number)
   {
  
-  return this.producservices.delete(id);
+  return this.producservices.like(id);
 }
 }
