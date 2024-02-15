@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable, UploadedFile } from '@nestjs/com
 import { UpdateProductsDto } from './dto/update-Products.dto copy';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './products.entity';
-import { Repository } from 'typeorm';
+import { Any, Repository } from 'typeorm';
 import { CreateProductsDto } from './dto/Create-Products.dto';
 import { dataidDto } from './dto/dataid.dto';
  
@@ -10,6 +10,9 @@ import async_foreach = require('../utils/async_foreach') ;
 import  storage = require('../utils/cloud_storage') ;
 import { activatetpDto } from './dto/activatetp.dto';
 import { datalikeDto } from './dto/datalike.dto';
+import { User } from 'src/users/user.entity';
+import { stripVTControlCharacters } from 'util';
+import { count } from 'console';
 @Injectable()
 export class ProductsService {
 
@@ -17,7 +20,64 @@ constructor (@InjectRepository(Products) private producRepository: Repository<Pr
 
 
 findAll(){
-    return this.producRepository.find();
+    return this.producRepository.find()          
+}
+
+    async finAllcount (){
+
+ 
+        let listarespuesta: Array< RespuestDto> =[]
+        let  respuesta:   RespuestDto ={x:'',y:0}
+        const data = await this.producRepository.find({
+        relations:['user']});
+        data.sort(function (a, b) {
+            // A va primero que B
+            if (a.user.id < b.user.id)
+                return -1;
+            // B va primero que A
+            else if (a.user.id > b.user.id)
+                return 1;
+            // A y B son iguales
+            else 
+                return 0;
+        });
+        let coun=0;
+        let  iduser;
+        let  numeroaux=0;
+        let  nombreaux='';
+
+        data.forEach((element) => {
+           
+             if(coun==0)
+             { 
+                iduser=element.user.id;
+                nombreaux=element.user.name
+                numeroaux=1; 
+             }else{
+                        if(iduser==Number(element.user.id)){
+                             numeroaux+=1; 
+                        }else{
+                            listarespuesta.push({x:nombreaux,y:numeroaux});
+                            numeroaux=1; 
+                            nombreaux=element.user.name
+                            iduser=element.user.id;
+                        }
+
+             }
+
+             iduser=element.user.id;
+             coun=coun+1;
+             console.log(element.user.name)
+           
+        }
+        
+        
+        );
+        listarespuesta.push({x:nombreaux,y:numeroaux});
+        console.log(listarespuesta)
+         
+
+return listarespuesta
 }
 
 

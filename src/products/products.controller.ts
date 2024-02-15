@@ -26,6 +26,16 @@ finAll() {
 
 
 
+// @HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+// @UseGuards(JwtAuthGuard ,JwtRolesGuard)
+@Get('cout')
+finAllcount() {
+ 
+  return this.producservices.finAllcount();
+}
+
+
+
 @HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Get('category/:id_category')
