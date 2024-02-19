@@ -123,7 +123,7 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
         const data1 ={
             tokens:listastrintoken,
             title:"NUEVA SEÑAL: "+newproduct.name+"CREADA",
-            body:"PUNTO 1:"+Number(newproduct.price)+"PUNTO 2:"+newproduct.price1+"\n"+"PUNTO 3:"+newproduct.price2+"SL:"+newproduct.sl
+            body:"PUNTO 1:"+newproduct.price.toFixed(0)+"PUNTO 2:"+newproduct.price1.toFixed(0)+ "PUNTO 3:"+newproduct.price2.toFixed(0)+"SL:"+newproduct.sl.toFixed(0)
          }
          await PUSH(data1);
        }
