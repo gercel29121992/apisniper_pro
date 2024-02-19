@@ -7,9 +7,6 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Rol } from 'src/roles/rol.entity';
-//import { sendPush } from '../../dist/notification';
-//const  Notification   = require("C:/Users/gercel/Documents/app/sniper pro/NestJS/sniper_pro/src/notification.js"); 
-import  PUSH = require('../utils/firebase_message') ;
 
 
 @Injectable()
@@ -65,12 +62,7 @@ export class AuthService {
 
     async login(logindata: LoginAuthDto)
     { 
-     const data1 ={
-        tokens:["dgLqr-AkSwqq6O9v01DA-z:APA91bGxLjJP4Cpr5me7q-SmtsGsbssgKQ6ilvgdDIlZO594lPzqvw8G1lD6VcZr5idx6Y_-igUM2C33cVSJaL99PKSCQJFJjQlnCAPIwxga7oeqQ5Friurgepo-s7l_xZEDNZqc2cCr"],
-        title:"hola prueba",
-        body:"prueba"
-     }
-     await PUSH(data1);
+     
         
         const {email,password}= logindata;
         const userFound= await this.usersRepository.findOne({

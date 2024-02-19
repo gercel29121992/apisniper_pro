@@ -26,8 +26,8 @@ finAll() {
 
 
 
-// @HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
-// @UseGuards(JwtAuthGuard ,JwtRolesGuard)
+ @HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Get('cout')
 finAllcount() {
  
