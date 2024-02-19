@@ -106,11 +106,22 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
        if(saveProduct!=null )
        {
+        let listastrintoken: Array<string> =[]   
          let listuser= await this.usersRepository.find({relations:['roles']});
          console.log(listuser);
 
+
+         listuser.forEach((element) => {
+        
+            if(element.notification_token != null){
+                listastrintoken.push(element.notification_token);
+            }
+       
+
+         })
+
         const data1 ={
-            tokens:["dgLqr-AkSwqq6O9v01DA-z:APA91bGxLjJP4Cpr5me7q-SmtsGsbssgKQ6ilvgdDIlZO594lPzqvw8G1lD6VcZr5idx6Y_-igUM2C33cVSJaL99PKSCQJFJjQlnCAPIwxga7oeqQ5Friurgepo-s7l_xZEDNZqc2cCr"],
+            tokens:listastrintoken,
             title:"SEÑAL: "+newproduct.name+"CREADA",
             body:"por el usuario"
          }
