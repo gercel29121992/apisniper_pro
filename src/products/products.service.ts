@@ -13,10 +13,14 @@ import { datalikeDto } from './dto/datalike.dto';
 import { User } from 'src/users/user.entity';
 import { stripVTControlCharacters } from 'util';
 import { count } from 'console';
+import  PUSH = require('../utils/firebase_message') ;
+
+ 
+
 @Injectable()
 export class ProductsService {
 
-constructor (@InjectRepository(Products) private producRepository: Repository<Products>){}
+constructor (@InjectRepository(Products) private producRepository: Repository<Products>,@InjectRepository(User) private usersRepository: Repository<User>){}
 
 
 findAll(){
@@ -99,6 +103,19 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
        let uploadedFile=0;
        const newproduct = this.producRepository.create(product);
        const saveProduct= await this.producRepository.save(newproduct);
+
+       if(saveProduct!=null )
+       {
+         let listuser= await this.usersRepository.find({relations:['roles']});
+         console.log(listuser);
+
+        const data1 ={
+            tokens:["dgLqr-AkSwqq6O9v01DA-z:APA91bGxLjJP4Cpr5me7q-SmtsGsbssgKQ6ilvgdDIlZO594lPzqvw8G1lD6VcZr5idx6Y_-igUM2C33cVSJaL99PKSCQJFJjQlnCAPIwxga7oeqQ5Friurgepo-s7l_xZEDNZqc2cCr"],
+            title:"SEÑAL: "+newproduct.name+"CREADA",
+            body:"por el usuario"+newproduct.user.name
+         }
+         await PUSH(data1);
+       }
     
     const startforeach=async () => {
         await async_foreach(files,async(file:Express.Multer.File)=>{
@@ -119,6 +136,10 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
            
 
         })
+
+
+
+         
        
         
     }
