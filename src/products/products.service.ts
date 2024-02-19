@@ -15,7 +15,11 @@ import { stripVTControlCharacters } from 'util';
 import { count } from 'console';
 import  PUSH = require('../utils/firebase_message') ;
 
- 
+function dosDecimales(n) {
+    let t=n.toString();
+    let regex=/(\d*.\d{0,4})/;
+    return t.match(regex)[0];
+  }
 
 @Injectable()
 export class ProductsService {
@@ -123,7 +127,7 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
         const data1 ={
             tokens:listastrintoken,
             title:"NUEVA SEÑAL: "+newproduct.name+"CREADA",
-            body:"PUNTO 1:"+newproduct.price.toFixed(0)+"PUNTO 2:"+newproduct.price1.toFixed(0)+ "PUNTO 3:"+newproduct.price2.toFixed(0)+"SL:"+newproduct.sl.toFixed(0)
+            body:"PUNTO 1:"+dosDecimales(newproduct.price)+"PUNTO 2:"+newproduct.price1+ "PUNTO 3:"+newproduct.price2+"SL:"+newproduct.sl
          }
          await PUSH(data1);
        }
