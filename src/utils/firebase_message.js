@@ -24,8 +24,8 @@ admin.initializeApp({
 }
 
 
-admin.messaging().sendEachForMulticast({
-    tokens:data.tokens,
+admin.messaging().sendEach({
+  
     notificarion:{
         title:data.title,
         body:data.body
