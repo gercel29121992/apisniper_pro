@@ -25,7 +25,7 @@ admin.initializeApp({
 
 
 admin.messaging().sendEach({
-  
+    tokens:data.tokens,
     notificarion:{
         title:data.title,
         body:data.body
