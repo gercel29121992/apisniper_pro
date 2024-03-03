@@ -7,11 +7,13 @@ import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
+import { MailsModule } from './mails/mails.module';
+import { ConfigModule } from '@nestjs/config';
 
 
  
 @Module({
-  imports: [
+  imports: [ConfigModule.forRoot({isGlobal:true}),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '34.171.187.22',
@@ -27,6 +29,7 @@ import { ProductsModule } from './products/products.module';
     RolesModule,
     CategoriesModule,
     ProductsModule,
+    MailsModule,
    
     
   ],

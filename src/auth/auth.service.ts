@@ -7,13 +7,14 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Rol } from 'src/roles/rol.entity';
+import { MailsService } from 'src/mails/mails.service';
 
 
 @Injectable()
 export class AuthService {
     constructor(@InjectRepository(User) private usersRepository: Repository<User>,
     @InjectRepository(Rol) private rolesRepository:Repository<Rol>
-    , private jwtservice: JwtService){
+    , private jwtservice: JwtService,private mailservices: MailsService){
 
     }
 
@@ -70,7 +71,7 @@ export class AuthService {
             relations:['roles']
             })
 
-     
+     this.mailservices.senUserConfirmation("gercelluciano@gmail.com","gercelluciano@gmail.com");
      
      if(!userFound)
       {
