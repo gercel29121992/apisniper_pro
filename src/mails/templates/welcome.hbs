@@ -1,1 +1,22 @@
-<h1>welcome</h1>
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+<button type="button" onclick="loadDoc()">Request data</button>
+
+<p id="demo"></p>
+ 
+<script>
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    alert( this.responseText);
+  }
+  xhttp.open("POST", "demo_post.asp");
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
