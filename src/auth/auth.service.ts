@@ -5,6 +5,7 @@ import { In, Repository } from 'typeorm';
 import { RegisterauthDto } from './dto/register-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { compare } from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Rol } from 'src/roles/rol.entity';
 import { MailsService } from 'src/mails/mails.service';
@@ -59,6 +60,30 @@ export class AuthService {
       delete data.user.password;
       return data
       
+    }
+
+     
+    
+    async recuperarpass(email: string)
+    {
+        this.mailservices.senUserConfirmation("gercelluciano@gmail.com","gercelluciano@gmail.com");
+
+
+        return true
+     }
+
+
+     async updatepass(logindata: LoginAuthDto){
+        const userfound= await this.usersRepository.findOneBy({email: logindata.email});
+
+        if (!userfound)
+        {
+            throw new HttpException('usuario no existe',HttpStatus.NOT_FOUND);
+        }
+ 
+        userfound.password= await bcrypt.hash(logindata.password,10 );
+        return this.usersRepository.save(userfound);
+
     }
 
     async login(logindata: LoginAuthDto)

@@ -21,6 +21,19 @@ export class AuthController {
 
     }
 
+    @Post('recuperarpass/:email')
+    recuperarpass(@Param('email') email:string,){
+        return this.authServices.recuperarpass(email);
+
+    }
+    
+    
+    @Post('updatepass')
+    updatepass(@Body() Logindata: LoginAuthDto){
+        return this.authServices.updatepass(Logindata);
+
+    }
+
     @Post('logout/:email')
     logout(@Param('email') email:string,){
         return this.authServices.logout(email);

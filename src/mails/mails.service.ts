@@ -11,8 +11,9 @@ export class MailsService {
   async senUserConfirmation(user:string,email:string){
     await this.mailerservices.sendMail({
       to:email,
-      subject:"recuperar pass",
+      subject:"Recuperar Password",
       template:'./welcome',
+      context:{id:email}
       
     })
   }
