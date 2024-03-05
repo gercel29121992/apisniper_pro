@@ -66,7 +66,7 @@ export class AuthService {
     
     async recuperarpass(email: string)
     {
-        this.mailservices.senUserConfirmation("gercelluciano@gmail.com","gercelluciano@gmail.com");
+        this.mailservices.senUserConfirmation(email );
 
 
         return true
@@ -82,7 +82,9 @@ export class AuthService {
         }
  
         userfound.password= await bcrypt.hash(logindata.password,10 );
-        return this.usersRepository.save(userfound);
+       const isok= this.usersRepository.save(userfound);
+
+       if(isok!=null) { return true }else{return true}
 
     }
 
@@ -96,7 +98,7 @@ export class AuthService {
             relations:['roles']
             })
 
-     this.mailservices.senUserConfirmation("gercelluciano@gmail.com","gercelluciano@gmail.com");
+     this.mailservices.welcome(email );
      
      if(!userFound)
       {

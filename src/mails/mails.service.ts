@@ -8,10 +8,20 @@ export class MailsService {
    
   constructor( private mailerservices: MailerService){}
 
-  async senUserConfirmation(user:string,email:string){
+  async senUserConfirmation( email:string){
     await this.mailerservices.sendMail({
       to:email,
       subject:"Recuperar Password",
+      template:'./recueperarpass',
+      context:{id:email}
+      
+    })
+  }
+
+  async welcome( email:string){
+    await this.mailerservices.sendMail({
+      to:email,
+      subject:"Bienvenido a SNIPER PRO ",
       template:'./welcome',
       context:{id:email}
       
