@@ -10,13 +10,14 @@ import { UpdateProductsDto } from './dto/update-Products.dto copy';
 import { dataidDto } from './dto/dataid.dto';
 import { activatetpDto } from './dto/activatetp.dto';
 import { datalikeDto } from './dto/datalike.dto';
+import { dataestadoDto } from './dto/dataestado.dto';
 
 @Controller('products')
 export class ProductsController {
 
 constructor(private producservices: ProductsService){}
 
-@HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Get()
 finAll() {
@@ -26,7 +27,7 @@ finAll() {
 
 
 
- @HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+ @HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Get('cout')
 finAllcount() {
@@ -36,15 +37,15 @@ finAllcount() {
 
 
 
-@HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
-@Get('category/:id_category')
-finAllCategory(@Param('id_category',ParseIntPipe) id_category:number,) {
+@Post('category/:id_category')
+finAllCategory(@Param('id_category',ParseIntPipe) id_category:number,@Body() estado:dataestadoDto) {
  
-  return this.producservices.findAllCategory(id_category);
+  return this.producservices.findAllCategory(id_category,estado);
 }
 
-@HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Get('id/:id')
 findid(@Param('id',ParseIntPipe) id :number,) {
@@ -54,7 +55,7 @@ findid(@Param('id',ParseIntPipe) id :number,) {
  
  
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Post()
 @UseInterceptors(FilesInterceptor('files[]',2))
@@ -84,7 +85,7 @@ activatetp(@Body() dataidDto: activatetpDto){
 
 }
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Put('upload/:id')
 @UseInterceptors(FilesInterceptor('files[]',2))
@@ -104,7 +105,7 @@ Updatewithimage(@UploadedFiles(
 
 
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Put(':id')
  
@@ -117,7 +118,7 @@ Update (
 
 
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Delete(':id')
  
@@ -130,7 +131,7 @@ delete (
 
 
 
-@HasRoles(JwtRole.ADMIN,JwtRole.CLIENT)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Put('like/:id')
  

@@ -16,7 +16,8 @@ export class CategoriesController {
 
     }
 
- @HasRoles(JwtRole.CLIENT,JwtRole.ADMIN)
+ @HasRoles(JwtRole.CLIENT,JwtRole.ADMIN,JwtRole.PROF
+ )
  @UseGuards(JwtAuthGuard ,JwtRolesGuard)
  @Get()
  findall(){
@@ -24,7 +25,7 @@ export class CategoriesController {
 
  }
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Post()
 @UseInterceptors(FileInterceptor('file'))
@@ -42,7 +43,7 @@ createWithImage(@UploadedFile(
 }
 
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Put('upload/:id')
 @UseInterceptors(FileInterceptor('file'))
@@ -61,7 +62,7 @@ updateWithImage(@UploadedFile(
 }
 
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Put(':id')
 update(@Param('id',ParseIntPipe) id:number,
@@ -71,7 +72,7 @@ return this.CategoryServices.update(id,category);
 }
 
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Delete(':id')
 delete(@Param('id',ParseIntPipe) id:number){

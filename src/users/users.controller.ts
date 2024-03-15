@@ -13,7 +13,7 @@ import { JwtRolesGuard } from 'src/auth/jwt/jwt-roles.guard';
 export class UsersController {
 constructor(private UsersService:UsersService){}
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard,JwtRolesGuard)
 @Get()
 findall(){
@@ -32,14 +32,14 @@ create(@Body() user:CreateUserDto){
 update(@Param('id',ParseIntPipe) id: number,   @Body() user:UpdateUserDto){
     return this.UsersService.update(id, user);
 }
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard,JwtRolesGuard)
 @Put('activate/:id')
 updateactivate(@Param('id',ParseIntPipe) id: number   ){
     return this.UsersService.activate(id);
 }
 
-@HasRoles(JwtRole.ADMIN)
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard,JwtRolesGuard)
 @Put('inactivate/:id')
 updateinactivate(@Param('id',ParseIntPipe) id: number ){

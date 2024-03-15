@@ -14,6 +14,7 @@ import { User } from 'src/users/user.entity';
 import { stripVTControlCharacters } from 'util';
 import { count } from 'console';
 import  PUSH = require('../utils/firebase_message') ;
+import { dataestadoDto } from './dto/dataestado.dto';
 
 function dosDecimales(n) {
     let t=n.toString();
@@ -89,8 +90,10 @@ return listarespuesta
 }
 
 
-findAllCategory(id_category:number){
-    return this.producRepository.findBy({id_category:id_category});
+findAllCategory(id_category:number,estado:dataestadoDto){
+     
+    return this.producRepository.findBy({id_category:id_category,estad:estado.estado});
+    
 }
 
 findid(id:number){
