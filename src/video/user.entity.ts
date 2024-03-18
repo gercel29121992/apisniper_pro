@@ -15,6 +15,9 @@ export class Video{
 
     @Column()
     description: string;
+    @Column()
+    image: string;
+    
 
     
 
