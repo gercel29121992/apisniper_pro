@@ -9,6 +9,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
 import { MailsModule } from './mails/mails.module';
 import { ConfigModule } from '@nestjs/config';
+import { VideoModule } from './video/video.module';
 
 
  
@@ -27,6 +28,7 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     AuthModule,
     RolesModule,
+    VideoModule,
     CategoriesModule,
     ProductsModule,
     MailsModule,
