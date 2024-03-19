@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Video } from './user.entity';
+import { Video } from './video.entity';
 import { JwtStrategy } from 'src/auth/jwt/jwt.strategy';
 import { VideoController } from './video.controller';
 import { VideoService } from './video.service';

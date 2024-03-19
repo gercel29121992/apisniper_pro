@@ -39,6 +39,14 @@ updateactivate(@Param('id',ParseIntPipe) id: number   ){
     return this.UsersService.activate(id);
 }
 
+
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF)
+@UseGuards(JwtAuthGuard,JwtRolesGuard)
+@Put('descargo/:id')
+updatedescargo(@Param('id',ParseIntPipe) id: number   ){
+    return this.UsersService.descargo(id);
+}
+
 @HasRoles(JwtRole.ADMIN,JwtRole.PROF)
 @UseGuards(JwtAuthGuard,JwtRolesGuard)
 @Put('inactivate/:id')

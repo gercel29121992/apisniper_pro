@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Video } from './user.entity';
+import { Video } from './video.entity';
 import { Repository } from 'typeorm';
  
 import  storage = require( '../utils/cloud_storage');
