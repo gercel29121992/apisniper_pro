@@ -143,7 +143,7 @@ async finAllranking (){
                     }else{
                         
 
-                        listarespuesta.push({nombre:nombreaux,ganadas:numeroaux,total:numerototalaux,imagen:element.user.imagen});
+                        listarespuesta.push({nombre:nombreaux,ganadas:numeroaux,total:numerototalaux,imagen:imagenaux});
                         numerototalaux=1;
                         numeroaux=0;
                         if(element.tpactivate1)
