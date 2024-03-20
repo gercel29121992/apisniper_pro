@@ -34,6 +34,14 @@ finAllcount() {
  
   return this.producservices.finAllcount();
 }
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
+@UseGuards(JwtAuthGuard ,JwtRolesGuard)
+@Get('ranking')
+finAllranking() {
+ 
+  return this.producservices.finAllranking();
+}
+
 
 
 

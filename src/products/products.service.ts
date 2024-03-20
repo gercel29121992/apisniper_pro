@@ -36,7 +36,7 @@ findAll(){
 
  
         let listarespuesta: Array< RespuestDto> =[]
-        let  respuesta:   RespuestDto ={x:'',y:0}
+       
         const data = await this.producRepository.find({
         relations:['user']});
         data.sort(function (a, b) {
@@ -76,15 +76,99 @@ findAll(){
 
              iduser=element.user.id;
              coun=coun+1;
-             console.log(element.user.name)
+              
            
         }
         
         
         );
         listarespuesta.push({x:nombreaux,y:numeroaux});
-        console.log(listarespuesta)
+  
          
+
+return listarespuesta
+}
+
+
+
+
+
+
+
+async finAllranking (){
+
+ 
+    let listarespuesta: Array< RespuesDtotaranking> =[]
+     
+    const data = await this.producRepository.find({
+    relations:['user']});
+    data.sort(function (a, b) {
+        // A va primero que B
+        if (a.user.id < b.user.id)
+            return -1;
+        // B va primero que A
+        else if (a.user.id > b.user.id)
+            return 1;
+        // A y B son iguales
+        else 
+            return 0;
+    });
+    let coun=0;
+    let  iduser;
+    let  numeroaux=0;
+    let  numerototalaux=0;
+    let  nombreaux='';
+    let  imagenaux='';
+
+    data.forEach((element) => {
+       
+         if(coun==0)
+         { 
+            iduser=element.user.id;
+            nombreaux=element.user.name
+            imagenaux=element.user.imagen;
+            numerototalaux=1;
+            if(element.tpactivate1)
+                        {
+                            numeroaux=1;
+                        }
+            
+         }else{
+                    if(iduser==Number(element.user.id)){
+                        numerototalaux+=1;
+                        if(element.tpactivate1)
+                        {
+                            numeroaux+=1;
+                        } 
+                    }else{
+                        
+
+                        listarespuesta.push({nombre:nombreaux,ganadas:numeroaux,total:numerototalaux,imagen:element.user.imagen});
+                        numerototalaux=1;
+                        numeroaux=0;
+                        if(element.tpactivate1)
+                        {
+                            numeroaux=1;
+                        } 
+                        nombreaux=element.user.name
+                        imagenaux=element.user.imagen;
+
+                        iduser=element.user.id;
+                    }
+
+         }
+
+         iduser=element.user.id;
+         coun=coun+1;
+         
+       
+    }
+    
+    
+    );
+    listarespuesta.push({nombre:nombreaux,ganadas:numeroaux,total:numerototalaux,imagen:imagenaux});
+     
+     
 
 return listarespuesta
 }
