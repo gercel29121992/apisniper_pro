@@ -29,7 +29,17 @@ constructor (@InjectRepository(Products) private producRepository: Repository<Pr
 
 
 findAll(){
-    return this.producRepository.find()          
+    return this.producRepository.find({relations:['user']})          
+}
+
+
+findAllCategory(id_category:number,estado:dataestadoDto){
+     
+    return this.producRepository.find({relations:['user'],where: { 
+        id_category: id_category,
+        estad: estado.estado
+      }});
+    
 }
 
     async finAllcount (){
@@ -174,11 +184,7 @@ return listarespuesta
 }
 
 
-findAllCategory(id_category:number,estado:dataestadoDto){
-     
-    return this.producRepository.findBy({id_category:id_category,estad:estado.estado});
-    
-}
+
 
 findid(id:number){
     return this.producRepository.findBy({id:id});
