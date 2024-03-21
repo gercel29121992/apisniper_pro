@@ -253,9 +253,9 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
     }
     await startforeach();
 
+    const valor = await this.producRepository.findOne({relations:['user'],where:{id:saveProduct.id}})
     
-   
-    return  saveProduct;
+    return  valor;
 
    }
 
@@ -264,7 +264,7 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
 
    async updateWithImage(id: number,files: Array<Express.Multer.File>,product: UpdateProductsDto){   
-    console.log(product);
+    
     if (files.length===0 ){
         throw new HttpException("las imagenes son obligatorias",HttpStatus.NOT_FOUND);
      
@@ -301,15 +301,15 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
     }
     await startforeach();
    
-
+    const valor = await this.producRepository.findOne({relations:['user'],where:{id:updateproduct.id}})
     
-    return updateproduct;
+    return valor;
 
    }
 
 
     async update(id: number,product: UpdateProductsDto){
-    console.log(product);
+    
 
      const productsFound = await this.producRepository.findOneBy({id:id})
    if (!productsFound ){
@@ -318,8 +318,10 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
    }
 
    const updateproducts= Object.assign(productsFound, product);
-   return this.producRepository.save(updateproducts);
-
+      
+   const valor = await this.producRepository.findOne({relations:['user'],where:{id:updateproducts.id}})
+     this.producRepository.save(updateproducts);
+      return valor
     }
 
     async activatetp(data:activatetpDto){

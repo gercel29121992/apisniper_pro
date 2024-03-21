@@ -33,6 +33,7 @@ export class AuthService {
             //409
             throw new HttpException('el telefono ya existe',HttpStatus.CONFLICT);
         }
+        user.descargo=0;
         const newUser=this.usersRepository.create(user);
         let rolesIds = [];
         if(user.rolesIds !== undefined && user.rolesIds!==null)

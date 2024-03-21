@@ -6,6 +6,8 @@ export class RegisterauthDto{
     @IsString()
     name:string;
 
+    descargo:number;
+
     @IsNotEmpty()
     @IsString()
     lastname:string;
