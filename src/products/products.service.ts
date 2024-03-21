@@ -252,8 +252,10 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
         
     }
     await startforeach();
+
+    
    
-    return saveProduct;
+    return  await this.producRepository.find({relations:['user'],where:{id:saveProduct.id}});
 
    }
 
