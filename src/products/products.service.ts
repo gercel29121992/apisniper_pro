@@ -187,7 +187,7 @@ return listarespuesta
 
 
 findid(id:number){
-    return this.producRepository.findBy({id:id});
+    return this.producRepository.find({relations:['user'],where:{id:id}});
 }
 
 
@@ -301,6 +301,8 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
     }
     await startforeach();
    
+
+    
     return updateproduct;
 
    }
