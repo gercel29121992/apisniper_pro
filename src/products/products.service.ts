@@ -205,7 +205,7 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
        {
         let listastrintoken: Array<string> =[]   
          let listuser= await this.usersRepository.find({relations:['roles']});
-         console.log(listuser);
+          
 
 
          listuser.forEach((element) => {
@@ -255,7 +255,7 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
     
    
-    return  await this.producRepository.find({relations:['user'],where:{id:saveProduct.id}});
+    return  saveProduct;
 
    }
 
