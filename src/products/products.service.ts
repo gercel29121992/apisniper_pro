@@ -382,6 +382,9 @@ async create(files: Array<Express.Multer.File>,product: CreateProductsDto){
 
 
        async getproductiduseridcategory(data: dataidDto){
-        return await this.producRepository.findBy({id_category:Number(data.id_category),id_user:Number(data.id_user)});
+        return await this.producRepository.find({relations:['user'],where:{id_category:Number(data.id_category),id_user:Number(data.id_user)}});
        }
+
+       
+      
 }
