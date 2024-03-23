@@ -53,6 +53,15 @@ finAllCategory(@Param('id_category',ParseIntPipe) id_category:number,@Body() est
   return this.producservices.findAllCategory(id_category,estado);
 }
 
+// esta pendiente es para traer el total de se;ales para el admin
+@HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
+@UseGuards(JwtAuthGuard ,JwtRolesGuard)
+@Post('getprototal/:id_category')
+finAllgetprototal(@Param('id_category',ParseIntPipe)  id_category:number ) {
+ 
+  return this.producservices.findAllgetprototal(id_category );
+}
+
 @HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
 @Get('id/:id')

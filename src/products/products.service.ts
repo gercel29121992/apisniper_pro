@@ -42,6 +42,16 @@ findAllCategory(id_category:number,estado:dataestadoDto){
     
 }
 
+
+findAllgetprototal(id_category:number ){
+     
+    return this.producRepository.find({relations:['user'],where: { 
+        id_category: id_category
+         
+      }});
+    
+}
+
     async finAllcount (){
 
  
