@@ -60,7 +60,7 @@ finAllCategory(@Param('id_category',ParseIntPipe) id_category:number,@Body() est
 finAllgetprototal(@Param('id_category',ParseIntPipe)  id_category:number ) {
  
   return this.producservices.findAllgetprototal(id_category );
-}
+}  
 
 @HasRoles(JwtRole.ADMIN,JwtRole.PROF,JwtRole.CLIENT)
 @UseGuards(JwtAuthGuard ,JwtRolesGuard)
